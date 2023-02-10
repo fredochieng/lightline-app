@@ -1,0 +1,11 @@
+{
+    "name": "MessageCenter",
+    "alias": "messagecenter",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MessageCenter\\Providers\\MessageCenterServiceProvider"
+    ],
+    "files": []
+}

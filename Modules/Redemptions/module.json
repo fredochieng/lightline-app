@@ -1,0 +1,11 @@
+{
+    "name": "Redemptions",
+    "alias": "redemptions",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Redemptions\\Providers\\RedemptionsServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,32 @@
+{
+    "menu": [
+        {
+            "name": "Dashboard",
+            "icon": "home",
+            "slug": ""
+        },
+        {
+            "name": "Survey Wall",
+            "icon": "package",
+            "slug": ""
+        },
+        {
+            "name": "Transactions",
+            "url": "/user/transactions",
+            "icon": "package",
+            "slug": "user.transactionList"
+        },
+        {
+            "name": "Redemptions",
+            "url" : "/user/redemptions",
+            "icon": "package",
+            "slug": "user.redemptions"
+        },
+        {
+            "name": "Message Center",
+            "url": "/user/redemptions",
+            "icon": "package",
+            "slug": ""
+        }
+    ]
+}

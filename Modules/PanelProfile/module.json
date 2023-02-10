@@ -1,0 +1,11 @@
+{
+    "name": "PanelProfile",
+    "alias": "panelprofile",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PanelProfile\\Providers\\PanelProfileServiceProvider"
+    ],
+    "files": []
+}
