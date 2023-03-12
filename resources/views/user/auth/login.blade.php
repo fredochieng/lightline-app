@@ -9,6 +9,9 @@ $configData = Helper::applClasses();
 {{-- Page Css files --}}
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/pages/authentication.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
+
 @endsection
 
 @section('content')
@@ -115,10 +118,12 @@ $configData = Helper::applClasses();
 
 @section('vendor-script')
 <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
 <script src="{{asset(mix('js/scripts/pages/auth-login.js'))}}"></script>
+<script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>
 
 <script>
     $(document).ready(function() {
@@ -138,13 +143,13 @@ $configData = Helper::applClasses();
                   },
                   cache: false,
                   success: function(response) {
-                      console.log(response);
+                     // console.log(response);
                       var response = JSON.parse(response);
                       var isRtl = $('html').attr('data-textdirection') === 'rtl';
                      // alert(response.statusCode);
                       if (response.statusCode == 200) {
                          
-                      window.location = "/user/profile/details";
+                      window.location = response.redirect_url;
                       } else if (response.statusCode == 201) {
                           toastr['error'](response.message, {
                           closeButton: true,

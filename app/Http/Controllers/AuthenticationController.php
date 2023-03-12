@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\adLDAP;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class AuthenticationController extends Controller
 {
+
     // Login v1
     public function login_form()
     {
@@ -30,23 +31,40 @@ class AuthenticationController extends Controller
             'password'  => $request->input('password'),
         );
 
-        // DB::table('users')->where(array('username' => $username))->update(array(
-        //     'password' => Hash::make($password)
-        // ));
+
 
         if (auth::attempt($userdata, $request->has('remember'))) { //this if validate if the user is on the database line 1
 
-            /** Check if the user is active and account verified */
-            //$user = 
+            // Check if the user has the "admin" role
+            if ($request->user()->hasRole(Role::findByName('Admin'))) {
+                $redirect_url = '/admin/panel/active';
+
+                // Redirect to the admin dashboard...
+
+            } else if ($request->user()->hasRole(Role::findByName('Panel'))) {
+                // Redirect to the regular user dashboard...
+
+                $user = User::where('email', $request->input('email'))->first();
+                $userStatus = $user->status;
+                if ($userStatus == 1) {
+                    $redirect_url = '/user/profile/details';
+                } else {
+                    return json_encode(array(
+                        "statusCode" => 201,
+                        "message" => 'Your account is inactive'
+                    ));
+                }
+            }
+
             return json_encode(array(
                 "statusCode" => 200,
-                "message" => 'Login successful'
+                "message" => 'Login successful',
+                "redirect_url" => $redirect_url
             ));
-            return redirect('/user/profile/details');
         } else {
             return json_encode(array(
-                "statusCode" => 200,
-                "message" => 'Login failed'
+                "statusCode" => 201,
+                "message" => 'Incorrect email/password'
             ));
         }
     }

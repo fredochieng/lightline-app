@@ -135,7 +135,7 @@
       </div>
     </div>
     <!-- deactivate account  -->
-    <div class="card">
+    {{-- <div class="card">
       <div class="card-header border-bottom">
         <h4 class="card-title">Deactivate Account</h4>
       </div>
@@ -160,7 +160,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> --}}
     <!--/ profile -->
   </div>
 </div>

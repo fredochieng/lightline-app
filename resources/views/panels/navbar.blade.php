@@ -86,10 +86,13 @@
         <li class="nav-item dropdown dropdown-language">
           <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown"
             aria-haspopup="true">
-            <i class="ficon" data-feather="dollar-sign"></i>
             @if (Auth::check())
+            @role('Panel')
+            <i class="ficon" data-feather="dollar-sign"></i>
             <?php 
-            $user_points = DB::table('user_points')->where('user_id', Auth::user()->id)->first()->points_balance;  echo $user_points ?> Points
+            $user_points = DB::table('user_points')->where('user_id', Auth::user()->id)->first()->points_balance;  echo $user_points ?>
+            Points
+            @endif
             @endif
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">
@@ -136,12 +139,12 @@
                 @endif
               </span>
               <span class="user-status">
-                Admin
+                Online
               </span>
             </div>
             <span class="avatar">
               <img class="round"
-                src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('images/portrait/small/avatar-s-11.jpg') }}"
+                src="{{ Auth::user() ? asset('images/portrait/small/avatar-s-11.png') : asset('images/portrait/small/avatar-s-11.png') }}"
                 alt="avatar" height="40" width="40">
               <span class="avatar-status-online"></span>
             </span>
@@ -160,13 +163,7 @@
             <div class="dropdown-divider"></div>
 
             @if (Auth::check())
-            <a class="dropdown-item" href="{{ route('user.register') }}"
-              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="me-50" data-feather="power"></i> Logout
-            </a>
-            <form method="POST" id="logout-form" action="{{ route('user.register') }}">
-              @csrf
-            </form>
+            <a class="dropdown-item" href="{{ URL::route('logout') }}"><i class="feather icon-power"></i> Logout</a>
             @endif
           </div>
         </li>

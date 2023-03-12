@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Form Wizard')
+@section('title', 'Panel Details')
 
 @section('vendor-style')
 <!-- vendor css files -->
@@ -81,7 +81,7 @@
     </div>
 </section>
 <!-- Horizontal Wizard -->
-<section class="horizontal-wizard">
+<section class="modern horizontal-wizard">
     <div class="bs-stepper horizontal-wizard-example">
         <div class="bs-stepper-header" role="tablist">
             <div class="step" data-target="#account-details" role="tab" id="account-details-trigger">
@@ -101,7 +101,7 @@
                     <span class="bs-stepper-box">2</span>
                     <span class="bs-stepper-label">
                         <span class="bs-stepper-title">Transactions</span>
-                        <span class="bs-stepper-subtitle">All point Transactions</span>
+                        <span class="bs-stepper-subtitle">All Point Transactions</span>
                     </span>
                 </button>
             </div>
@@ -112,8 +112,8 @@
                 <button type="button" class="step-trigger">
                     <span class="bs-stepper-box">3</span>
                     <span class="bs-stepper-label">
-                        <span class="bs-stepper-title">Address</span>
-                        <span class="bs-stepper-subtitle">Add Address</span>
+                        <span class="bs-stepper-title">Redemptions</span>
+                        <span class="bs-stepper-subtitle">All Panel Redemptions</span>
                     </span>
                 </button>
             </div>
@@ -124,8 +124,8 @@
                 <button type="button" class="step-trigger">
                     <span class="bs-stepper-box">4</span>
                     <span class="bs-stepper-label">
-                        <span class="bs-stepper-title">Social Links</span>
-                        <span class="bs-stepper-subtitle">Add Social Links</span>
+                        <span class="bs-stepper-title">Referrals</span>
+                        <span class="bs-stepper-subtitle">All Referrals by the Panel</span>
                     </span>
                 </button>
             </div>
@@ -195,12 +195,12 @@
 
                 </form>
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-secondary btn-prev" disabled>
-                        <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                    </button>
+                    {{-- <button class="btn btn-primary btn-next">
+                        <span class="align-middle d-sm-inline-block d-none">Transactions</span>
+                        <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                    </button> --}}
                     <button class="btn btn-primary btn-next">
-                        <span class="align-middle d-sm-inline-block d-none">Next</span>
+                        <span class="align-middle d-sm-inline-block d-none">Transactions</span>
                         <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                     </button>
                 </div>
@@ -210,11 +210,11 @@
                     <h5 class="mb-0">Transactions</h5>
                     <small>All transactions within the account</small>
                 </div>
+                <form></form>
                 <div class="card-datatable">
                     <table class="dt-responsive-tx table">
                         <thead>
                             <tr>
-
                                 <th>Transaction ID</th>
                                 <th>Points</th>
                                 <th>Activity</th>
@@ -230,8 +230,6 @@
                                 <td>{{ $tx->activity }}</td>
                                 <td>{{ $tx->tx_type }}</td>
                                 <td>{{ $tx->created_at }}</td>
-
-
                             </tr>
                             @endforeach
                         </tbody>
@@ -240,91 +238,100 @@
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-primary btn-prev">
                         <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                        <span class="align-middle d-sm-inline-block d-none">Account Details</span>
                     </button>
                     <button class="btn btn-primary btn-next">
-                        <span class="align-middle d-sm-inline-block d-none">Next</span>
+                        <span class="align-middle d-sm-inline-block d-none">Redemptions</span>
                         <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                     </button>
                 </div>
             </div>
             <div id="address-step" class="content" role="tabpanel" aria-labelledby="address-step-trigger">
                 <div class="content-header">
-                    <h5 class="mb-0">Address</h5>
-                    <small>Enter Your Address.</small>
+                    <h5 class="mb-0">Redemptions</h5>
+                    <small>All the redemptions by the panel.</small>
                 </div>
-                <form>
-                    <div class="row">
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="address">Address</label>
-                            <input type="text" id="address" name="address" class="form-control"
-                                placeholder="98  Borough bridge Road, Birmingham" />
-                        </div>
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="landmark">Landmark</label>
-                            <input type="text" name="landmark" id="landmark" class="form-control"
-                                placeholder="Borough bridge" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="pincode1">Pincode</label>
-                            <input type="text" id="pincode1" class="form-control" placeholder="658921" />
-                        </div>
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="city1">City</label>
-                            <input type="text" id="city1" class="form-control" placeholder="Birmingham" />
-                        </div>
-                    </div>
-                </form>
+                <form></form>
+               <div class="card-datatable">
+                    <table class="dt-responsive-red table">
+                        <thead>
+                            <tr>
+                                <th>Redemption No</th>
+                                <th>Points</th>
+                                <th>Request Date</th>
+                                <th>Expected Date</th>
+                                <th>Date Paid</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($panel_redemptions as $count=> $redemptions)
+                            <tr>
+                                <td>{{ $redemptions->redemption_no }}</td>
+                                <td>{{ $redemptions->points_redeemed }}</td>
+                                <td>{{ $redemptions->created_at }}</td>
+                                <td>{{ $redemptions->expected_date }}</td>
+                                <td>{{ $redemptions->date_paid }}</td>
+                                @if ($redemptions->status == 1)
+                                <td><span class="badge rounded-pill badge-light-primary">Pending</span></td>
+                                @elseif ($redemptions->status == 2)
+                                <td><span class="badge rounded-pill badge-light-success">Completed</span></td>
+                                @endif
+                               
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-primary btn-prev">
                         <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                        <span class="align-middle d-sm-inline-block d-none">Transactions</span>
                     </button>
                     <button class="btn btn-primary btn-next">
-                        <span class="align-middle d-sm-inline-block d-none">Next</span>
+                        <span class="align-middle d-sm-inline-block d-none">Referrals</span>
                         <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                     </button>
                 </div>
             </div>
             <div id="social-links" class="content" role="tabpanel" aria-labelledby="social-links-trigger">
                 <div class="content-header">
-                    <h5 class="mb-0">Social Links</h5>
-                    <small>Enter Your Social Links.</small>
+                    <h5 class="mb-0">Referrals</h5>
+                    <small>Referrals by the panel.</small>
                 </div>
-                <form>
-                    <div class="row">
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="twitter">Twitter</label>
-                            <input type="text" id="twitter" name="twitter" class="form-control"
-                                placeholder="https://twitter.com/abc" />
-                        </div>
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="facebook">Facebook</label>
-                            <input type="text" id="facebook" name="facebook" class="form-control"
-                                placeholder="https://facebook.com/abc" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="google">Google+</label>
-                            <input type="text" id="google" name="google" class="form-control"
-                                placeholder="https://plus.google.com/abc" />
-                        </div>
-                        <div class="mb-1 col-md-6">
-                            <label class="form-label" for="linkedin">Linkedin</label>
-                            <input type="text" id="linkedin" name="linkedin" class="form-control"
-                                placeholder="https://linkedin.com/abc" />
-                        </div>
-                    </div>
-                </form>
+                <form></form>
+               <div class="card-datatable">
+                    <table class="dt-responsive-ref table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Registration Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($panel_referrals as $count=> $referrals)
+                            <tr>
+                                <td>{{ $referrals->name }}</td>
+                                <td>{{ $referrals->email }}</td>
+                                <td>{{ $referrals->created_at }}</td>
+                                @if ($referrals->status == 0)
+                                <td><span class="badge rounded-pill badge-light-primary">Pending</span></td>
+                                @elseif ($referrals->status == 1)
+                                <td><span class="badge rounded-pill badge-light-success">Verified</span></td>
+                                @endif
+                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-primary btn-prev">
                         <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                        <span class="align-middle d-sm-inline-block d-none">Redemptions</span>
                     </button>
-                    <button class="btn btn-success btn-submit">Submit</button>
                 </div>
             </div>
         </div>
@@ -348,5 +355,5 @@
 @section('page-script')
 <!-- Page js files -->
 <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
-<script src="{{ asset('js/scripts/tables/panel-transactions.js') }}"></script>
+<script src="{{ asset('js/scripts/tables/panel-details-tables.js') }}"></script>
 @endsection

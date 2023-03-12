@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Account')
+@section('title', 'My Account')
 
 @section('vendor-style')
 <!-- vendor css files -->
@@ -25,24 +25,6 @@
 @section('content')
 <div class="row">
   <div class="col-12">
-    <ul class="nav nav-pills mb-2">
-      <!-- Account -->
-      <li class="nav-item">
-        <a class="nav-link active" href="{{asset('page/account-settings-account')}}">
-          <i data-feather="user" class="font-medium-3 me-50"></i>
-          <span class="fw-bold">Account</span>
-        </a>
-      </li>
-      <!-- security -->
-      <li class="nav-item">
-        <a class="nav-link" href="{{asset('user/profile1')}}">
-          <i data-feather="lock" class="font-medium-3 me-50"></i>
-          <span class="fw-bold">Security</span>
-        </a>
-      </li>
-      <!-- billing and plans -->
-    </ul>
-
     <!-- profile -->
     <div class="card">
       <div class="card-header border-bottom">
@@ -140,18 +122,6 @@
               @endforeach
             </select>
           </div>
-          {{-- <div class="col-12 col-sm-4 mb-1">
-            <label class="form-label" for="country">Race</label>
-            <select id="race_id" required class="select2 form-select" required>
-              <option value="{{ $user_profile_data->race_id }}">{{ $user_profile_data->race }}
-              </option>
-              @foreach($races as $race)
-              <option value="{{ $race->race_id }}">{{ $race->race }}
-              </option>
-              @endforeach
-            </select>
-          </div> --}}
-
           <div class="col-12">
             <button type="submit" id="update_profile" class="btn btn-primary mt-1 me-1">Update Profile</button>
           </div>
@@ -160,112 +130,81 @@
         <!--/ form -->
       </div>
     </div>
-    <!-- deactivate account  -->
+    {{-- deactivate account --}}
     <div class="card">
-      <div class="card-header border-bottom">
+      {{-- <div class="card-header border-bottom">
         <h4 class="card-title">Deactivate Account</h4>
-      </div>
+      </div> --}}
       <div class="card-body py-2 my-25">
         <div class="alert alert-warning">
-          <h4 class="alert-heading">Are you sure you want to deactivate your account?</h4>
           <div class="alert-body fw-normal">
-            Once you deactivate your account, there is no going back. Please be certain.
+            Click the button below to change your password
           </div>
         </div>
 
-        <form id="formAccountDeactivation" class="validate-form" onsubmit="return false">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation"
-              data-msg="Please confirm you want to delete account" />
-            <label class="form-check-label font-small-3" for="accountActivation">
-              I confirm my account deactivation
-            </label>
+        <div class="row">
+          <input type="hidden" name="_token" id="csrf1" value="{{Session::token()}}">
+          {{-- <div class="row">
+            <div class="col-md-6">
+              <label class="form-label">Current Password</label>
+              <input type="text" id="current_pass" class="form-control" value="" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">New Password</label>
+              <input type="text" id="new_pass" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Confirm Password</label>
+              <input type="text" id="confirm_pass" class="form-control" />
+            </div>
+            <div class="col-12 mt-2 pt-50">
+              <button type="submit" id="changePassBtn" class="btn btn-primary me-1">Change Password
+              </button>
+            </div>
+          </div> --}}
+          <div class="col-12 col-sm-4 mb-1">
+            <button type="submit" class="btn btn-info deactivate-account mt-1" data-bs-toggle="modal"
+              data-bs-target="#changePasswordModal">Change Password</button>
           </div>
-          <div>
+          <div class="col-12 col-sm-4 mb-1">
             <button type="submit" class="btn btn-danger deactivate-account mt-1">Deactivate Account</button>
           </div>
-        </form>
+          <div class="col-12 col-sm-4 mb-1">
+            <button type="submit" class="btn btn-info deactivate-account mt-1">Change Password</button>
+          </div>
+        </div>
       </div>
     </div>
-    <!--/ profile -->
+    <!--/ profile
   </div>
 </div>
+@include('panelprofile::profile/_partials/_modals/change-password')
 @endsection
 
 @section('vendor-script')
 <!-- vendor files -->
-<script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 
-<script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.date.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.date.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
 
-<script src="{{ asset(mix('vendors/js/forms/cleave/cleave.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/forms/cleave/addons/cleave-phone.us.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/forms/cleave/cleave.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/forms/cleave/addons/cleave-phone.us.js')) }}"></script>
 
-<script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
-@endsection
-@section('page-script')
-<!-- Page js files -->
-<script src="{{ asset(mix('js/scripts/pages/page-account-settings-account.js')) }}"></script>
-<script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
+    @endsection
+    @section('page-script')
+    <!-- Page js files -->
+    <script src="{{ asset(mix('js/scripts/pages/page-account-settings-account.js')) }}"></script>
+    <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
 
-<script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>
+    <script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>
 
-<script>
-  $(document).ready(function() {
-      $('#update_profile').on('click', function() {
-          var dob = $('#fp_default').val();
-          var gender = $('#gender').val();
-          var user_id = $('#user_id').val();
-          var education_level_id = $('#education_level_id').val();
-          var marital_status_id = $('#marital_status_id').val();
-          //var race_id = $('#race_id').val();
+    <script src="{{ asset('js/scripts/pages/user-profile.js') }}"></script>
 
-          // Post request using Ajax
-              $.ajax({
-                  url: "/user/profile/update",
-                  type: "POST",
-                  data: {
-                      _token: $("#csrf").val(),
-                      type: 1,
-                      l9ky0xwifr3sqtzv: user_id,
-                      dob: dob,
-                      gender: gender,
-                      education_level_id: education_level_id,
-                      marital_status_id:marital_status_id,
-                      //race_id:race_id
-                  },
-                  cache: false,
-                  success: function(response) {
-                      var response = JSON.parse(response);
-                      var isRtl = $('html').attr('data-textdirection') === 'rtl';
-                      if (response.statusCode == 200) {
-                        // Show toastr notification
-                        toastr['success'](response.message, 'Profile Update', {
-                        closeButton: true,
-                        tapToDismiss: false,
-                        progressBar: true,
-                        rtl: isRtl
-                        });
-
-                        location.reload();
-                        
-                      } else if (response.statusCode == 201) {
-                          toastr['error'](response.message, 'Profile Update', {
-                          closeButton: true,
-                          tapToDismiss: false,
-                          progressBar: true,
-                          rtl: isRtl
-                          });
-                      }
-
-                  }
-              });
-      });
-  });
-</script>
-@endsection
+    @endsection

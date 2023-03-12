@@ -1,6 +1,18 @@
 <?php
 
 return [
+    "Dashboard" => "Dashboard",
+    "Survey Wall" => "Survey Wall",
+    "Transactions" => "Transactions",
+    "Redemptions" => "Redemptions",
+    "Message Center" => "Message Center",
+    "Referrals" => "Referrals",
+
+
+
+
+
+
     "Apps & Pages" => "Apps & Pages",
     "User Interface" => "User Interface",
     "Dashboards" => "Dashboards",

@@ -3,7 +3,7 @@
         {
             "name": "Dashboard",
             "icon": "home",
-            "slug": ""
+            "slug": "user.dashboard"
         },
         {
             "name": "Survey Wall",
@@ -18,9 +18,15 @@
         },
         {
             "name": "Redemptions",
-            "url" : "/user/redemptions",
+            "url": "/user/redemptions",
             "icon": "package",
             "slug": "user.redemptions"
+        },
+        {
+            "name": "Referrals",
+            "url": "/user/invites/",
+            "icon": "package",
+            "slug": "user.invites"
         },
         {
             "name": "Message Center",

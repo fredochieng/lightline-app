@@ -2,9 +2,11 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -12,6 +14,14 @@ class AdminController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+
+    public function adminProfileView()
+    {
+
+        $data['user_id'] = Auth::user()->id;
+        $data['user_profile_data'] = User::find($data['user_id']);
+        return view('admin::profile/admin-profile')->with($data);
+    }
     public function index()
     {
         return view('admin::index');

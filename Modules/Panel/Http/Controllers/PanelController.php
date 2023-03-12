@@ -4,12 +4,14 @@ namespace Modules\Panel\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Setting;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Modules\MessageCenter\Entities\ReferralEmails;
 use Modules\Panel\Entities\Models\Panel;
 use Modules\Redemptions\Entities\Entities\Models\Redemption;
@@ -82,6 +84,55 @@ class PanelController extends Controller
                 "statusCode" => 201,
                 "message" => 'An error occured... try again'
             ));
+        }
+    }
+
+    public function changePass(Request $request)
+    {
+        /** Get form data */
+        $user_id = $request->input('l9ky0xwifr3sqtzv');
+        $current_pass = $request->input('current_pass');
+        $new_pass = $request->input('new_pass');
+        $confirm_pass = $request->input('confirm_pass');
+        $user = User::find($user_id);
+
+        DB::beginTransaction();
+
+        try {
+            if (Hash::check($current_pass, $user->password)) {
+
+                if ($new_pass == $confirm_pass) {
+                    $user_pass = array(
+                        'password' => Hash::make($new_pass)
+                    );
+
+                    $update_password = User::where('id', $user_id)->update($user_pass);
+                    DB::commit();
+
+                    return json_encode(array(
+                        "statusCode" => 200,
+                        "message" => 'Password changed successfully'
+                    ));
+                } else {
+                    return json_encode(array(
+                        "statusCode" => 201,
+                        "message" => 'confirm password does not match new password'
+                    ));
+                }
+            } else {
+                return json_encode(array(
+                    "statusCode" => 201,
+                    "message" => 'Current password is incorrect'
+                ));
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            /** Return response with status code */
+            return json_encode(array(
+                "statusCode" => 201,
+                "message" => 'An error occured... try again'
+            ));
+            \Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
         }
     }
 
@@ -160,7 +211,9 @@ class PanelController extends Controller
         $data['panel_points'] = Redemption::getUserPoints($id);
 
         $data['point_transactions'] = Redemption::getUserPointTransactions($id);
-        // dd($data['point_transactions']);
+        $data['point_transactions'] = $data['point_transactions']->where('user_id', $id);
+        $data['panel_redemptions'] = Redemption::getUserRedemption($id);
+        $data['panel_referrals'] = Panel::getUserReferrals($id);
         //$active_panel['data'] = $data['panel_details'];
         return view('admin::panel-management/panel-details')->with($data);
     }

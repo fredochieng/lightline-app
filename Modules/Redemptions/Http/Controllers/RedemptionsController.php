@@ -33,18 +33,19 @@ class RedemptionsController extends Controller
         return response()->json($userRedemptions);
     }
 
+    /** For panel */
     public function transactionsList()
     {
-
         return view('redemptions::transactions');
     }
 
-    public function getUserPointTransactions()
+    public function getPanelPointTransactions()
     {
         $user_id = Auth::user()->id;
-        $point_transactions = Redemption::getUserPointTransactions($user_id);
-        $userPointTransactions['data'] = $point_transactions;
-        return response()->json($userPointTransactions);
+        $myRedemptions = Redemption::getUserPointTransactions($user_id);
+        $panelRedemptions['data'] = $myRedemptions;
+
+        return response()->json($panelRedemptions);
     }
 
     /**
@@ -145,6 +146,34 @@ class RedemptionsController extends Controller
         }
     }
 
+    /** For admin */
+    public function showTransView()
+    {
+        return view('admin::points-management/point-trans');
+    }
+
+    public function pointsTransactionsFetch()
+    {
+        $user_id = Auth::user()->id;
+        $point_transactions = Redemption::getUserPointTransactions($user_id);
+        $userPointTransactions['data'] = $point_transactions;
+
+        return response()->json($userPointTransactions);
+    }
+
+    public function showRedemptionsView()
+    {
+        return view('admin::redemptions-management/redemptions');
+    }
+
+    public function panelRedemptionsFetch()
+    {
+        $user_id = Auth::user()->id;
+        $point_transactions = Redemption::getPanelRedemptions();
+        $userPointTransactions['data'] = $point_transactions;
+
+        return response()->json($userPointTransactions);
+    }
     /**
      * Show the specified resource.
      * @param int $id

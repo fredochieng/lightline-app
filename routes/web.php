@@ -41,6 +41,8 @@ Route::post('/auth/user/verify-account', [RegisterController::class, 'verify_acc
 Route::get('/auth/user/login', [AuthenticationController::class, 'login_form'])->name('login');
 Route::post('/auth/user/authenticate', [AuthenticationController::class, 'authenticateUser'])->name('user.authenticate');
 
+Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
 
 
 
@@ -50,7 +52,7 @@ Route::post('/auth/user/authenticate', [AuthenticationController::class, 'authen
 
 
 // Main Page Route
-Route::get('/', [DashboardController::class, 'dashboardEcommerce'])->name('dashboard-ecommerce');
+// Route::get('/', [DashboardController::class, 'dashboardEcommerce'])->name('dashboard-ecommerce');
 
 
 /* Route Dashboards */
