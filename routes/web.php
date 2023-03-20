@@ -44,6 +44,12 @@ Route::post('/auth/user/verify-account', [RegisterController::class, 'verify_acc
 Route::get('/auth/user/login', [AuthenticationController::class, 'login_form'])->name('login');
 Route::post('/auth/user/authenticate', [AuthenticationController::class, 'authenticateUser'])->name('user.authenticate');
 
+Route::get('/auth/forgot-password', [AuthenticationController::class, 'forgort_password_form'])->name('forgot.password');
+Route::post('/auth/user/sendPasswordResetEmail', [AuthenticationController::class, 'send_password_reset_email'])->name('send.pass-reset-email');
+
+Route::get('/reset-password', [AuthenticationController::class, 'resetPassword'])->name('reset-password');
+Route::post('/reset-password-process', [AuthenticationController::class, 'resetPasswordProcess'])->name('reset-password-process');
+
 Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
 

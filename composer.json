@@ -16,6 +16,7 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "nwidart/laravel-modules": "^9.0",
+        "ramsey/uuid": "^4.7",
         "spatie/laravel-permission": "^5.9"
     },
     "require-dev": {

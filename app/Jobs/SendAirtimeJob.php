@@ -46,7 +46,10 @@ class SendAirtimeJob implements ShouldQueue
 
         $redemption_requests = Redemption::getRedemptionsForAirtime()
             ->whereIn('country_code', $country_codes)
-            ->take(2);
+            //->get()
+            ->take(1);
+
+        //dd($redemption_requests);
 
         // Initialize the SDK
         $AT = new AfricasTalking($ke_airtime_username, $ke_airtime_api_key);
@@ -59,7 +62,9 @@ class SendAirtimeJob implements ShouldQueue
             foreach ($redemption_requests as $key => $value) {
                 // Set the numbers you want to send to in international format
                 $phone_nos = $value->phone_number;
+                //$phone_nos = ['254708823158'];
                 $amount = $value->points_redeemed;
+                $amount = 5;
 
                 try {
                     // Set the phone number, currency code and amount in the format below
@@ -73,6 +78,9 @@ class SendAirtimeJob implements ShouldQueue
                     $results = $airtime->send([
                         "recipients" => $recipients
                     ]);
+
+                    print_r($results);
+                    exit;
 
                     foreach ($results as $key => $status) {
 

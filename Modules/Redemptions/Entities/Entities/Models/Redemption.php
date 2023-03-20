@@ -102,6 +102,6 @@ class Redemption extends Model
             ->leftJoin('user_details', 'redemptions.user_id', '=', 'user_details.user_id')
             ->get();
 
-        return redemptions;
+        return $redemptions;
     }
 }
