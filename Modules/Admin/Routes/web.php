@@ -40,6 +40,10 @@ Route::middleware(['auth', 'account.verified', 'role:Admin'])->group(
             });
 
             Route::namespace('\Modules\Admin\Http\Controllers')->group(function () {
+                Route::get('/dashboard', 'AdminDashboardController@dashboardView')->name('admin.dashboard');
+            });
+
+            Route::namespace('\Modules\Admin\Http\Controllers')->group(function () {
                 Route::get('/profile', 'AdminController@adminProfileView')->name('admin.show.profile.view');
             });
         });

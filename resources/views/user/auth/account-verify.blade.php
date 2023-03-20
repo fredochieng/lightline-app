@@ -4,6 +4,8 @@
 
 @section('page-style')
 <link rel="stylesheet" href="{{ asset(mix('css/base/pages/authentication.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
 @endsection
 
 @section('content')
@@ -95,10 +97,12 @@
 
 @section('vendor-script')
 <script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
 <script src="{{asset(mix('js/scripts/pages/auth-two-steps.js'))}}"></script>
+<script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>
 
 <script>
     $(document).ready(function() {

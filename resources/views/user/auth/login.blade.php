@@ -10,6 +10,7 @@ $configData = Helper::applClasses();
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/pages/authentication.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
+<link rel='stylesheet' href="{{ asset(mix('vendors/css/extensions/sweetalert2.min.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
 
 @endsection
@@ -69,46 +70,39 @@ $configData = Helper::applClasses();
         <!-- Login-->
         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                <h2 class="card-title fw-bold mb-1">Welcome to Lightline👋</h2>
-                <input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-                <div class="mb-1">
-                    <label class="form-label" for="login-email">Email Address</label>
-                    <input class="form-control" id="email" type="text" name="login-email"
-                        placeholder="Enter your email address" aria-describedby="login-email" autofocus=""
-                        tabindex="1" />
-                </div>
-                <div class="mb-1">
-                    <div class="d-flex justify-content-between">
-                        <label class="form-label" for="login-password">Password</label>
-                        <a href="{{url("auth/forgot-password-cover")}}">
-                            <small>Forgot Password?</small>
-                        </a>
+                <h2 class="card-title fw-bold mb-1">Welcome to Lightline Online👋</h2>
+                <form id="loginForm">
+                    <input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
+                    <div class="mb-1">
+                        <label class="form-label" for="login-email">Email Address</label>
+                        <input class="form-control" id="email" type="text" name="email"
+                            placeholder="Enter your email address" aria-describedby="login-email" autofocus=""
+                            tabindex="1" />
                     </div>
-                    <div class="input-group input-group-merge form-password-toggle">
-                        <input class="form-control form-control-merge" id="password" type="password"
-                            name="login-password" placeholder="Enter your password" tabindex="2" />
+                    <div class="mb-1">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label" for="login-password">Password</label>
+                            <a href="{{url("auth/forgot-password-cover")}}">
+                                <small>Forgot Password?</small>
+                            </a>
+                        </div>
+                        <div class="input-group input-group-merge form-password-toggle">
+                            <input class="form-control form-control-merge" id="password" type="password" name="password"
+                                placeholder="Enter your password" tabindex="2" />
+                        </div>
                     </div>
-                </div>
-                <div class="mb-1">
-                    <div class="form-check">
-                        <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3" />
-                        <label class="form-check-label" for="remember-me"> Remember Me</label>
+                    <div class="mb-1">
+                        <div class="form-check">
+                            <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3" />
+                            <label class="form-check-label" for="remember-me"> Remember Me</label>
+                        </div>
                     </div>
-                </div>
-                <button class="btn btn-primary w-100" id="user_login_btn" tabindex="4">Sign in</button>
+                    <button class="btn btn-primary w-100" id="user_login_btn" tabindex="4">Login</button>
+                </form>
                 <p class="text-center mt-2">
-                    <span>New on our platform?</span>
+                    <span>Don't have an account?</span>
                     <a href="{{url('/auth/user/register')}}"><span>&nbsp;Create an account</span></a>
                 </p>
-                <div class="divider my-2">
-                    <div class="divider-text">or</div>
-                </div>
-                <div class="auth-footer-btn d-flex justify-content-center">
-                    <a class="btn btn-facebook" href="#"><i data-feather="facebook"></i></a>
-                    <a class="btn btn-twitter white" href="#"><i data-feather="twitter"></i></a>
-                    <a class="btn btn-google" href="#"><i data-feather="mail"></i></a>
-                    <a class="btn btn-github" href="#"><i data-feather="github"></i></a>
-                </div>
             </div>
         </div>
         <!-- /Login-->
@@ -117,7 +111,12 @@ $configData = Helper::applClasses();
 @endsection
 
 @section('vendor-script')
-<script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+{{-- New code --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+{{-- New code --}}
+
+{{-- <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script> --}}
 <script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
 @endsection
 
@@ -126,12 +125,40 @@ $configData = Helper::applClasses();
 <script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+    $('#loginForm').submit(function (event) {
+        event.preventDefault(); // prevent default form submit behavior
 
-      $('#user_login_btn').on('click', function() {
-       
-          var email = $('#email').val();
-          var password = $('#password').val();
+        // initialize jQuery Validate plugin with custom error messages
+        $('#loginForm').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                },
+               
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                
+                email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address",
+                },
+                
+                password: {
+                    required: "Please enter a password",
+                },
+            }
+        });
+
+        // perform form validation
+        if ($('#loginForm').valid()) {
+            // submit the form data via AJAX
+             var email = $('#email').val();
+             var password = $('#password').val();
               $.ajax({
                   url: "/auth/user/authenticate",
                   type: "POST",
@@ -151,7 +178,7 @@ $configData = Helper::applClasses();
                          
                       window.location = response.redirect_url;
                       } else if (response.statusCode == 201) {
-                          toastr['error'](response.message, {
+                          toastr['error'](response.message, 'Login Feedback', {
                           closeButton: true,
                           tapToDismiss: false,
                           progressBar: true,
@@ -161,7 +188,10 @@ $configData = Helper::applClasses();
 
                   }
               });
-      });
-  });
+        } else {
+            // $('#auth_register').prop('disabled', true);
+        }
+    });
+});
 </script>
 @endsection

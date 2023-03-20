@@ -86,4 +86,22 @@ class Redemption extends Model
 
         return $redemptions;
     }
+
+
+    public static function getRedemptionsForAirtime()
+    {
+        $status = 1;
+        $redemptions = DB::table('redemptions')->select(
+            DB::raw('redemptions.*'),
+            DB::raw('redemptions.id as redemption_id'),
+            DB::raw('user_details.user_id as p_user_id'),
+            DB::raw('user_details.phone_number'),
+            DB::raw('user_details.country_code')
+        )
+            ->where('redemptions.status', '=', $status)
+            ->leftJoin('user_details', 'redemptions.user_id', '=', 'user_details.user_id')
+            ->get();
+
+        return redemptions;
+    }
 }

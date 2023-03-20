@@ -11,15 +11,6 @@ $configData = Helper::applClasses();
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}"> --}}
 <link rel="stylesheet" href="{{ asset(mix('css/base/pages/authentication.css')) }}">
 <link rel="stylesheet" href="{{ asset('vendors/css/intl-tel-input/intlTelInput.css') }}">
-
-<style>
-  #myForm label.error {
-    color: red !important;
-    font-size: 0.8em !important;
-    margin-top: 5px !important;
-  }
-</style>
-
 @endsection
 
 @section('content')
@@ -27,8 +18,7 @@ $configData = Helper::applClasses();
   <div class="auth-inner row m-0">
     <!-- Brand logo-->
     <a class="brand-logo" href="#">
-      <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
+      <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
         <defs>
           <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
             <stop stop-color="#000000" offset="0%"></stop>
@@ -42,18 +32,11 @@ $configData = Helper::applClasses();
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g id="Artboard" transform="translate(-400.000000, -178.000000)">
             <g id="Group" transform="translate(400.000000, 178.000000)">
-              <path class="text-primary" id="Path"
-                d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z"
-                style="fill: currentColor"></path>
-              <path id="Path1"
-                d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z"
-                fill="url(#linearGradient-1)" opacity="0.2"></path>
-              <polygon id="Path-2" fill="#000000" opacity="0.049999997"
-                points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
-              <polygon id="Path-21" fill="#000000" opacity="0.099999994"
-                points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
-              <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994"
-                points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
+              <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill: currentColor"></path>
+              <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
+              <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
+              <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
+              <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
             </g>
           </g>
         </g>
@@ -80,40 +63,37 @@ $configData = Helper::applClasses();
         <h4 class="card-title fw-bold mb-1">Sign up to start the adventure</h4>
         {{-- <p class="card-text mb-2">Make your app management easy and fun!</p> --}}
 
-        <form id="myForm">
-          <input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-          <div class="mb-1">
-            <label for="fullname">Full Name</label>
-            <input type="text" class="form-control" id="fullname" name="name" placeholder="Enter first and last name" />
-          </div>
+        <input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
+        <div class="mb-1">
+          <label for="register-username" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullname" name="name" placeholder="Enter first and last name" />
+        </div>
 
-          <div class="mb-1">
-            <label for="email">Email Address</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email address" />
-          </div>
+        <div class="mb-1">
+          <label class="form-label" for="register-email">Email Address</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="Enter email address" />
+        </div>
 
-          <div class="mb-1">
-            <label for="phone">Phone Number</label>
-            <input id="phone" name="phone" type="tel" class="form-control intl-tel-input">
-            <input id="completePhone" type="hidden" name="completePhone">
-            <input id="countryCode" type="hidden" id="countryCode">
-          </div>
+        <div class="mb-1">
+          <label class="form-label" for="register-password">Phone Number</label>
+          <input id="phone" type="tel" class="form-control intl-tel-input">
+          <input id="completePhone" type="hidden" id="completePhone">
+          <input id="countryCode" type="hidden" id="countryCode">
+        </div>
 
-          <div class="mb-1">
-            <label for="password">Password</label>
-            <input type="password" class="form-control form-control-merge" id="password" name="password"
-              placeholder="Enter your password" />
-          </div>
+        <div class="mb-1">
+          <label class="form-label" for="register-email">Password</label>
+          <input type="password" class="form-control form-control-merge" id="password" name="password" placeholder="Enter your password" />
+        </div>
 
-          <div class="mb-1">
-            <div class="form-check">
-              <input class="form-check-input" id="terms" name="terms" type="checkbox" tabindex="4" />
-              <label for="terms">I agree to<a href="#">&nbsp;privacy policy &
-                  terms</a></label>
-            </div>
+        <div class="mb-1">
+          <div class="form-check">
+            <input class="form-check-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
+            <label class="form-check-label" for="register-privacy-policy">I agree to<a href="#">&nbsp;privacy policy &
+                terms</a></label>
           </div>
-          <button class="btn btn-primary w-100" id="auth_register" tabindex="5">Create Account</button>
-        </form>
+        </div>
+        <button class="btn btn-primary w-100" id="auth_register" tabindex="5">Create Account</button>
 
         <p class="text-center mt-2">
           <span>Already have an account with us?</span>
@@ -131,19 +111,14 @@ $configData = Helper::applClasses();
 @endsection
 
 @section('vendor-script')
-
-{{-- New code --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-{{-- New code --}}
-
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{-- <script src="{{asset('vendors/js/forms/validation/jquery.validate.min.js')}}"></script> --}}
 @endsection
 
 @section('page-script')
 <script src="{{asset('js/scripts/pages/auth-register.js')}}"></script>
 <script src="{{ asset(mix('vendors/js/intl-tel-input/intlTelInput.js')) }}"></script>
-<script src="{{ asset('js/scripts/register.js') }}"></script>
+<script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
   var input = document.querySelector("#phone");
   output = document.querySelector("#output");
@@ -175,7 +150,7 @@ $configData = Helper::applClasses();
   input.addEventListener('keyup', handleChange);
 </script>
 
-{{-- <script>
+<script>
   $(document).ready(function() {
 
     $('#auth_register').on('click', function() {
@@ -215,5 +190,5 @@ $configData = Helper::applClasses();
       });
     });
   });
-</script> --}}
+</script>
 @endsection

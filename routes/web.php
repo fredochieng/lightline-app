@@ -35,6 +35,9 @@ Route::get('/', function () {
 
 Route::get('/auth/user/register', [RegisterController::class, 'registration_form'])->name('user.register');
 Route::post('/auth/user/process-registration', [RegisterController::class, 'register'])->name('register');
+Route::post('/check-email', [RegisterController::class, 'checkEmail'])->name('check.email');
+Route::post('/check-phone', [RegisterController::class, 'checkPhone'])->name('check.phone');
+
 Route::get('/auth/user/verify', [RegisterController::class, 'verify_form'])->name('verify.form');
 Route::post('/auth/user/verify-account', [RegisterController::class, 'verify_account'])->name('verify.account');
 

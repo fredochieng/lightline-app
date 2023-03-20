@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Modules\Panel\Entities\UserDetails;
 
 class RegisterController extends Controller
 {
@@ -17,6 +18,31 @@ class RegisterController extends Controller
 
         return view('/user/auth/register', ['pageConfigs' => $pageConfigs]);
     }
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            return response()->json(false);
+        }
+
+        return response()->json(true);
+    }
+
+    public function checkPhone(Request $request)
+    {
+        $phone = $request->input('phone');
+        $user = UserDetails::where('phone_number', $phone)->first();
+
+        if ($user) {
+            return response()->json(false);
+        }
+
+        return response()->json(true);
+    }
+
 
     public function register(Request $request)
     {
@@ -115,7 +141,7 @@ class RegisterController extends Controller
             /** Return response with status code */
             return json_encode(array(
                 "statusCode" => 201,
-                "bba9f6361764d423317d202402d57190" => $user_id,
+                "bba9f6361764d423317d202402d57190" => 'h',
                 "message" => 'Registration failed'
             ));
         }

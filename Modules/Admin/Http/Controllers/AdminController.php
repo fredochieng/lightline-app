@@ -15,6 +15,8 @@ class AdminController extends Controller
      * @return Renderable
      */
 
+   
+
     public function adminProfileView()
     {
 
