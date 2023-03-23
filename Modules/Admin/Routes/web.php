@@ -35,7 +35,7 @@ Route::middleware(['auth', 'account.verified', 'role:Admin'])->group(
 
             /** Redemptions Management Module */
             Route::namespace('\Modules\Redemptions\Http\Controllers')->group(function () {
-                Route::get('/panel/redemptions', 'RedemptionsController@showRedemptionsView')->name('admin.show.trans.view');
+                Route::get('/panel/redemptions', 'RedemptionsController@showRedemptionsView')->name('admin.show.red.view');
                 Route::get('/panel/redemptions/fetch', 'RedemptionsController@panelRedemptionsFetch')->name('admin.points.trans.fetch');
             });
 

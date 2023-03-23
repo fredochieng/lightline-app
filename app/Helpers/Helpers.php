@@ -13,23 +13,43 @@ class Helpers
         $data = config('custom.custom');
 
         // default data array
+        // $DefaultData = [
+        //     'mainLayoutType' => 'vertical',
+        //     'theme' => 'light',
+        //     'sidebarCollapsed' => false,
+        //     'navbarColor' => '',
+        //     'horizontalMenuType' => 'floating',
+        //     'verticalMenuNavbarType' => 'floating',
+        //     'footerType' => 'static', //footer
+        //     'layoutWidth' => 'boxed',
+        //     'showMenu' => true,
+        //     'bodyClass' => '',
+        //     'pageClass' => '',
+        //     'pageHeader' => true,
+        //     'contentLayout' => 'default',
+        //     'blankPage' => false,
+        //     'defaultLanguage' => 'en',
+        //     'direction' => env('MIX_CONTENT_DIRECTION', 'ltr'),
+        // ];
+
         $DefaultData = [
             'mainLayoutType' => 'vertical',
             'theme' => 'light',
-            'sidebarCollapsed' => false,
+            'sidebarCollapsed' => true,
             'navbarColor' => '',
             'horizontalMenuType' => 'floating',
             'verticalMenuNavbarType' => 'floating',
             'footerType' => 'static', //footer
-            'layoutWidth' => 'boxed',
+            'layoutWidth' => 'full',
             'showMenu' => true,
             'bodyClass' => '',
+            'bodyStyle' => '',
             'pageClass' => '',
             'pageHeader' => true,
             'contentLayout' => 'default',
             'blankPage' => false,
             'defaultLanguage' => 'en',
-            'direction' => env('MIX_CONTENT_DIRECTION', 'ltr'),
+            'direction' => env('MIX_CONTENT_DIRECTION', 'rtl'),
         ];
 
         // if any key missing of array from custom.php file it will be merge and set a default value from dataDefault array and store in data variable

@@ -1,14 +1,15 @@
 <?php
+
 return [
     'custom' => [
         'mainLayoutType' => 'horizontal', // Options[String]: vertical(default), horizontal
-        'theme' => 'light', // options[String]: 'light'(default), 'dark', 'bordered', 'semi-dark'
+        'theme' => 'semi-dark', // options[String]: 'light'(default), 'dark', 'bordered', 'semi-dark'
         'sidebarCollapsed' => false, // options[Boolean]: true, false(default) (warning:this option only applies to the vertical theme.)
-        'navbarColor' => '', // options[String]: bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark (default: '' for #fff)
-        'horizontalMenuType' => 'static', // options[String]: floating(default) / static /sticky (Warning:this option only applies to the Horizontal theme.)
-        'verticalMenuNavbarType' => 'floating', // options[String]: floating(default) / static / sticky / hidden (Warning:this option only applies to the vertical theme)
+        'navbarColor' => 'bg-success', // options[String]: bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark (default: '' for #fff)
+        'horizontalMenuType' => 'sticky', // options[String]: floating(default) / static /sticky (Warning:this option only applies to the Horizontal theme.)
+        'verticalMenuNavbarType' => 'static', // options[String]: floating(default) / static / sticky / hidden (Warning:this option only applies to the vertical theme)
         'footerType' => 'static', // options[String]: static(default) / sticky / hidden
-        'layoutWidth' => 'full', // options[String]: full / boxed(default),
+        'layoutWidth' => 'full', // options[String]: boxed(default) / full,
         'showMenu' => true, // options[Boolean]: true(default), false //show / hide main menu (Warning: if set to false it will hide the main menu)
         'bodyClass' => '', // add custom class
         'pageHeader' => true, // options[Boolean]: true(default), false (Page Header for Breadcrumbs)

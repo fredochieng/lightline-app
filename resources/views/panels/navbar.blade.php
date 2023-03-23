@@ -113,20 +113,8 @@
             <ul class="search-list search-list-main"></ul>
           </div>
         </li>
-        <li class="nav-item dropdown dropdown-notification me-25">
-          <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
-            <i class="ficon" data-feather="bell"></i>
-            <span class="badge rounded-pill bg-danger badge-up">5</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
-            <li class="dropdown-menu-header">
-              <div class="dropdown-header d-flex">
-                <h4 class="notification-title mb-0 me-auto">Notifications</h4>
-                <div class="badge rounded-pill badge-light-primary">6 New</div>
-              </div>
-            </li>
-          </ul>
-        </li>
+       
+        
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
             data-bs-toggle="dropdown" aria-haspopup="true">

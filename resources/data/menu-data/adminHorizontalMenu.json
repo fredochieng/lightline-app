@@ -3,36 +3,32 @@
         {
             "name": "Dashboard",
             "icon": "home",
-            "slug": "user.dashboard"
+            "url": "/admin/dashboard",
+            "slug": "admin.dashboard"
         },
         {
-            "name": "Survey Wall",
+            "name": "Panel",
             "icon": "package",
-            "slug": ""
+            "url": "/admin/panel/active",
+            "slug": "admin.panel.active"
         },
         {
             "name": "Transactions",
-            "url": "/user/transactions",
+            "url": "/admin/points/transactions",
             "icon": "package",
-            "slug": "user.transactionList"
+            "slug": "admin.show.trans.view"
         },
         {
             "name": "Redemptions",
-            "url": "/user/redemptions",
+            "url": "/admin/panel/redemptions",
             "icon": "package",
-            "slug": "user.redemptions"
+            "slug": "admin.show.red.view'"
         },
         {
-            "name": "Referrals",
-            "url": "/user/invites/",
+            "name": "Profile",
+            "url": "/admin/profile",
             "icon": "package",
-            "slug": "user.invites"
-        },
-        {
-            "name": "Message Center",
-            "url": "/user/redemptions",
-            "icon": "package",
-            "slug": ""
+            "slug": "admin.show.profile.view"
         }
     ]
 }

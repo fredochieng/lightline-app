@@ -1,14 +1,10 @@
 {
     "menu": [
         {
-            "name": "Dashboard",
-            "icon": "home",
-            "slug": "user.dashboard"
-        },
-        {
-            "name": "Survey Wall",
+            "name": "Profile",
+            "url": "/user/profile/details",
             "icon": "package",
-            "slug": ""
+            "slug": "user.profile"
         },
         {
             "name": "Transactions",
@@ -27,12 +23,6 @@
             "url": "/user/invites/",
             "icon": "package",
             "slug": "user.invites"
-        },
-        {
-            "name": "Message Center",
-            "url": "/user/redemptions",
-            "icon": "package",
-            "slug": ""
         }
     ]
 }
