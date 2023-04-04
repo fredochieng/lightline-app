@@ -5,6 +5,7 @@ namespace Modules\MessageCenter\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\MessageCenter\Entities\ContactUs;
 
 class MessageCenterController extends Controller
 {
@@ -15,6 +16,33 @@ class MessageCenterController extends Controller
     public function index()
     {
         return view('messagecenter::index');
+    }
+
+    public function send_message(Request $request)
+    {
+        //dd('nn');
+        $name = ucwords($request->input('name'));
+        $email = $request->input('email');
+        $subject = ucwords($request->input('subject'));
+        $to_email = $request->input('to_email');
+        $message = $request->input('message');
+
+        $contact_us = new ContactUs();
+        $contact_us->name = $name;
+        $contact_us->email = $email;
+        $contact_us->subject = $subject;
+        $contact_us->message = $message;
+        $contact_us->to_email = $to_email;
+
+        $from = $email;
+        $from_name = $name;
+        $to = $to_email;
+
+        $subject = $subject;
+        $message = $message;
+
+        $headers = 'From: ' . $from_name . '<' . $from . '>' . "\r\n";
+        mail($to, $subject, $message, $headers);
     }
 
     /**

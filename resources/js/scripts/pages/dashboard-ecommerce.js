@@ -17,8 +17,8 @@ $(window).on('load', function () {
   var $goalStrokeColor2 = '#51e5a8';
   var $strokeColor = '#ebe9f1';
   var $textHeadingColor = '#5e5873';
-  var $earningsStrokeColor2 = '#28c76f66';
-  var $earningsStrokeColor3 = '#28c76f33';
+  var $earningsStrokeColor2 = '#F66B1D66';
+  var $earningsStrokeColor3 = '#F66B1D33';
 
   var $statisticsOrderChart = document.querySelector('#statistics-order-chart');
   var $statisticsProfitChart = document.querySelector('#statistics-profit-chart');

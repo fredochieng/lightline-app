@@ -8,9 +8,9 @@
 ==========================================================================================*/
 window.colors = {
   solid: {
-    primary: '#7367F0',
+    primary: '#F66B1D',
     secondary: '#82868b',
-    success: '#28C76F',
+    success: '#F66B1D',
     info: '#00cfe8',
     warning: '#FF9F43',
     danger: '#EA5455',
@@ -20,9 +20,9 @@ window.colors = {
     body: '#f8f8f8'
   },
   light: {
-    primary: '#7367F01a',
+    primary: '#F66B1D1a',
     secondary: '#82868b1a',
-    success: '#28C76F1a',
+    success: '#F66B1D1a',
     info: '#00cfe81a',
     warning: '#FF9F431a',
     danger: '#EA54551a',

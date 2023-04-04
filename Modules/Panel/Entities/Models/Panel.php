@@ -112,6 +112,7 @@ class Panel extends Model
             ->leftJoin('countries', 'user_details.country_code', '=', 'countries.country_code')
             ->leftJoin('education_level', 'user_details.education_level_id', '=', 'education_level.id')
             ->leftJoin('marital_status', 'user_details.marital_status_id', '=', 'marital_status.id')
+            ->whereNotNull('users.registration_type')
             ->get(
                 [
                     'users.id as user_id', 'users.name', 'users.email', 'users.status', 'users.registration_type', 'users.created_at', 'users.registration_type',

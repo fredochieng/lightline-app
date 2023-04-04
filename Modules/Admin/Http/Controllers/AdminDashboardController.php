@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\Airtime;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -108,6 +109,11 @@ class AdminDashboardController extends Controller
         } else {
             $data['completed_redemptions_amount'] = "0.00";
         }
+
+        /** Fetch Africas Talking Application Data */
+        $AT_data = Airtime::get_AT_application_data();
+
+        $data['AT_balance'] = $AT_data['balance'][0]  . ' ' . number_format($AT_data['balance'][1], 2, '.', ',');
 
 
 

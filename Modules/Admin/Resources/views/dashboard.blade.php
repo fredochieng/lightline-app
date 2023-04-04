@@ -163,16 +163,17 @@
                 <div class="card-header">
                     <div>
                         <h2 class="fw-bolder mb-0">{{ $pending_redemptions_amount }}</h2>
-                        <p class="card-text">Pending Redemptions Amount</p>
+                        <p class="card-text">Pending Redem Amount</p>
                     </div>
-                    <div class="avatar bg-light-success p-50 m-0">
+                    <div class="avatar bg-light-primary p-50 m-0">
                         <div class="avatar-content">
-                            <i data-feather="server" class="font-medium-5"></i>
+                            <i data-feather="cpu" class="font-medium-5"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-header">
@@ -188,12 +189,13 @@
                 </div>
             </div>
         </div>
+       
         <div class="col-lg-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-header">
                     <div>
                         <h2 class="fw-bolder mb-0">{{ $completed_redemptions_amount }}</h2>
-                        <p class="card-text">Completed Redemptions Amount</p>
+                        <p class="card-text">Completed Redem Amount</p>
                     </div>
                     <div class="avatar bg-light-warning p-50 m-0">
                         <div class="avatar-content">
@@ -206,7 +208,23 @@
     </div>
     <!-- Line Chart Card -->
     <div class="row">
-        <div class="col-lg-4 col-sm-6 col-12">
+        <div class="col-lg-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-header align-items-start pb-0">
+                    <div>
+                        <h2 class="fw-bolder"> {{ $AT_balance }}</h2>
+                        <p class="card-text">AT Balance</p>
+                    </div>
+                    <div class="avatar bg-light-primary p-50">
+                        <div class="avatar-content">
+                            <i data-feather="dollar-sign" class="font-medium-5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div id="line-area-chart-5"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-header align-items-start pb-0">
                     <div>
@@ -222,7 +240,7 @@
                 <div id="line-area-chart-5"></div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 col-12">
+        <div class="col-lg-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-header align-items-start pb-0">
                     <div>
@@ -238,7 +256,7 @@
                 <div id="line-area-chart-6"></div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 col-12">
+        <div class="col-lg-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-header align-items-start pb-0">
                     <div>

@@ -62,7 +62,7 @@ class Helpers
             'sidebarCollapsed' => array(true, false),
             'showMenu' => array(true, false),
             'layoutWidth' => array('full', 'boxed'),
-            'navbarColor' => array('bg-primary', 'bg-info', 'bg-warning', 'bg-success', 'bg-danger', 'bg-dark'),
+            'navbarColor' => array('bg-primary', 'bg-lightline-primary', 'bg-info', 'bg-warning', 'bg-success', 'bg-danger', 'bg-dark'),
             'horizontalMenuType' => array('floating' => 'navbar-floating', 'static' => 'navbar-static', 'sticky' => 'navbar-sticky'),
             'horizontalMenuClass' => array('static' => '', 'sticky' => 'fixed-top', 'floating' => 'floating-nav'),
             'verticalMenuNavbarType' => array('floating' => 'navbar-floating', 'static' => 'navbar-static', 'sticky' => 'navbar-sticky', 'hidden' => 'navbar-hidden'),

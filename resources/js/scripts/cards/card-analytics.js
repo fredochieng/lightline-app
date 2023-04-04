@@ -20,8 +20,8 @@ $(window).on('load', function () {
   var $textMutedColor = '#b9b9c3';
   var $salesStrokeColor2 = '#df87f2';
   var $white = '#fff';
-  var $earningsStrokeColor2 = '#28c76f66';
-  var $earningsStrokeColor3 = '#28c76f33';
+  var $earningsStrokeColor2 = '#F66B1D66';
+  var $earningsStrokeColor3 = '#F66B1D33';
 
   var supportChartOptions;
   var avgSessionChartOptions;

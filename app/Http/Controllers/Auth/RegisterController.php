@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\EmailService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -127,6 +128,13 @@ class RegisterController extends Controller
 
             $save_user_role = DB::table('model_has_roles')->insert($user_role);
 
+            $data = [
+                'title' => 'Verify Account',
+                'verirication_code' => $user->verification_code
+            ];
+
+            $email = EmailService::sendEmail($user->email,  'Verify Email', 'emails.reset-password', $data);
+
             DB::commit();
 
             /** Return response with status code */
@@ -152,6 +160,7 @@ class RegisterController extends Controller
     {
         $user_iden = $request->input('a2fc0b91fe81da0904a2dd407abca5879ca55839f3a4ebcf6f192814ad220bb4cf358d1adbf51199ee7f64d41f8d18be');
         $pageConfigs = ['blankPage' => true];
+
         return view('/user/auth/account-verify', [
             'pageConfigs' => $pageConfigs,
             'c3f5ffa0e4b13671f15334aa066d20b9' => $user_iden

@@ -43,7 +43,7 @@ class AuthenticationController extends Controller
 
             // Check if the user has the "admin" role
             if ($request->user()->hasRole(Role::findByName('Admin'))) {
-                $redirect_url = '/admin/panel/active';
+                $redirect_url = '/admin/panel';
 
                 // Redirect to the admin dashboard...
 

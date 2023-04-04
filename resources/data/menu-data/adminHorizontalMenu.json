@@ -9,20 +9,33 @@
         {
             "name": "Panel",
             "icon": "package",
-            "url": "/admin/panel/active",
+            "url": "/admin/panel",
             "slug": "admin.panel.active"
         },
         {
             "name": "Transactions",
-            "url": "/admin/points/transactions",
-            "icon": "package",
-            "slug": "admin.show.trans.view"
+            "icon": "home",
+            "slug": "",
+            "submenu": [
+                {
+                    "name": "Transactions List",
+                    "url": "/admin/points/transactions",
+                    "icon": "package",
+                    "slug": "admin.show.trans.view"
+                },
+                {
+                    "name": "Award Points",
+                    "url": "/admin/panel/award-points",
+                    "icon": "package",
+                    "slug": "points.upload.file"
+                }
+            ]
         },
         {
             "name": "Redemptions",
             "url": "/admin/panel/redemptions",
             "icon": "package",
-            "slug": "admin.show.red.view'"
+            "slug": "admin.show.red.view"
         },
         {
             "name": "Profile",

@@ -9,6 +9,11 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Redemptions\Entities\Entities\Models\Redemption;
+use Modules\Redemptions\Entities\PointBulkUpload;
+use Ramsey\Uuid\Uuid;
+use Alert;
+use Illuminate\Support\Facades\Bus;
+use Modules\Redemptions\Jobs\ProcessPointUploadJob;
 
 class RedemptionsController extends Controller
 {
@@ -95,7 +100,7 @@ class RedemptionsController extends Controller
                     $current_balance = $user_points->points_balance;
 
                     /** Update new points balance for the user */
-                    $update_points = DB::table('user_points')->update([
+                    $update_points = DB::table('user_points')->where('user_id', $user_id)->update([
                         'points_redeemed' => $current_redeemed + $redeem_points,
                         'points_balance' => $current_balance - $redeem_points
                     ]);
@@ -173,6 +178,145 @@ class RedemptionsController extends Controller
         $userPointTransactions['data'] = $point_transactions;
 
         return response()->json($userPointTransactions);
+    }
+
+    public function uploadPointsFile()
+    {
+        // Alert::success('Success Title', 'Success Message');
+        // alert('Title', 'Lorem Lorem Lorem', 'success');
+        toast('Your Post as been submited!', 'success');
+        return view('admin::points-management/upload-points');
+    }
+
+    public function saveUploadPointsFile(Request $request)
+    {
+
+        $path = storage_path('uploads/points/history');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $file = $request->file('csv_file');
+        $original_file_name = $file->getClientOriginalName();
+        $name = uniqid() . '_' . trim($file->getClientOriginalName());
+        $file->move($path, $name);
+
+        $data = array_map('str_getcsv', file($path . '/' . $name));
+
+        $header_fields = $data[0];
+        $csv_data = array_slice($data, 0, 1000);
+        $header0 = trim($header_fields[0]);
+        $header1 = trim($header_fields[1]);
+
+        $header0 = preg_replace('/^\xEF\xBB\xBF/', '', $header0);
+        $header1 = preg_replace('/^\xEF\xBB\xBF/', '', $header1);
+
+        // Check headers
+        if (($header0 === "panel") && ($header1 === "points")) {
+            $header_row = array_shift($csv_data);
+            // Check point values
+            $invalid_rows = [];
+            foreach ($csv_data as $key => $row) {
+                $panel = $row[0];
+                $points = $row[1];
+                //dd($points);
+                if (!is_numeric($points)) {
+
+                    $invalid_rows[] = $key + 1; // Add 2 to convert 0-based index to 1-based row number, and skip header row
+                }
+            }
+
+            if (!empty($invalid_rows)) {
+                // Return an error message with the list of rows with invalid point values
+                $message = "The following rows have invalid point values: " . implode(", ", $invalid_rows);
+
+                return back()->withInput()->withErrors(['csv_file' => $message]);
+            } else {
+                // Check if any row has empty values
+
+                array_unshift($csv_data, $header_row);
+
+                $empty_rows = [];
+                foreach ($csv_data as $key => $row) {
+                    foreach ($row as $value) {
+                        if (empty($value)) {
+                            $empty_rows[] = $key + 1; // Add 2 to convert 0-based index to 1-based row number, and skip header row
+                            break;
+                        }
+                    }
+                }
+
+                if (!empty($empty_rows)) {
+                    // Return an error message with the list of rows with empty values
+                    $message = "The following rows have empty values: " . implode(", ", $empty_rows);
+
+                    return back()->withInput()->withErrors(['csv_file' => $message]);
+                } else {
+                    array_unshift($data, $header_row);
+                    $csv_data = json_encode($csv_data, JSON_UNESCAPED_UNICODE);
+
+
+                    $csv_data_file = PointBulkUpload::create([
+                        'uuid' => Uuid::uuid4(),
+                        'reason' => $request->input('purpose'),
+                        'csv_filename' => $request->file('csv_file')->getClientOriginalName(),
+                        'csv_header' => $request->has('header'),
+                        'unique_file_name' => $name,
+                        'csv_data' => $csv_data,
+                    ]);
+
+                    $upload_uuid = $csv_data_file->uuid;
+
+                    return redirect()->route('admin.points.bulk.preview', $upload_uuid)->with(['bulk' => $csv_data]);
+                }
+            }
+        } else {
+
+            $message = "Invalid headers. The first column should be 'panel_no' and the second column should be 'points'.";
+
+            return back()->withInput()->withErrors(['csv_file' => $message]);
+        }
+    }
+
+    public function uploadFilePreview($id)
+    {
+        $preview_data = PointBulkUpload::where('uuid', $id)->get();
+        $unique_file_name = $preview_data[0]->unique_file_name;
+        $reason = $preview_data[0]->reason;
+        $csv_data = $preview_data[0]->csv_data;
+        $created_at = $preview_data[0]->created_at;
+        $batch_status = $preview_data[0]->upload_processed;
+        $data_array = json_decode($csv_data, true);
+        $data_rows = array_slice($data_array, 1);
+
+        return view('admin::points-management/upload-preview', [
+            'rows' => $data_rows, 'data_file_uuid' => $id, 'unique_file_name' => $unique_file_name,
+            'reason' => $reason, 'batch_status' => $batch_status, 'created_at' => $created_at
+        ]);
+    }
+
+    public function processUploadPointsFile(Request $request)
+    {
+        $data_file_uuid = $request->input('data_file_uuid');
+        $unique_file_name = $request->input('unique_file_name');
+        $reason = $request->input('reason');
+        $path = storage_path('uploads/points/history');
+
+        $data = file($path . '/' . $unique_file_name);
+        $chunks = array_chunk($data, 1000);
+        $header = [];
+
+        $batch = Bus::batch([])->dispatch();
+
+        foreach ($chunks as $key => $chunk) {
+
+            $data = array_map('str_getcsv', $chunk);
+            unset($data[0]);
+            $header = config('app.points_bulk_upload_fields');
+            $batch->add(new ProcessPointUploadJob($data, $header, $reason, $data_file_uuid));
+        }
+
+        return redirect()->route('admin.show.award.points');
     }
     /**
      * Show the specified resource.

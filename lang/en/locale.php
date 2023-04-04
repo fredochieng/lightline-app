@@ -7,6 +7,9 @@ return [
     "Redemptions" => "Redemptions",
     "Message Center" => "Message Center",
     "Referrals" => "Referrals",
+    "Panel" => "Panel",
+    "Award Points" => "Award Points",
+    "Transactions List" => "Transactions List",
 
 
 

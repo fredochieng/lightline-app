@@ -17,7 +17,7 @@ class Airtime extends Model
         $ke_airtime_api_key   = AfricasTalkingAirtime::get_ke_airtime_api_key();
 
         // Initialize the SDK
-        $AT = new AfricasTalkingAirtime($ke_airtime_username, $ke_airtime_api_key);
+        $AT = new AfricasTalking($ke_airtime_username, $ke_airtime_api_key);
 
         // Get one of the services
         $bal = $AT->application()->fetchApplicationData();

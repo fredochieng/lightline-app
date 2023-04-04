@@ -164,7 +164,7 @@
             </div>
           </div> --}}
           <div class="col-12 col-sm-4 mb-1">
-            <button type="submit" class="btn btn-info deactivate-account mt-1" data-bs-toggle="modal"
+            <button type="submit" class="btn btn-primary deactivate-account mt-1" data-bs-toggle="modal"
               data-bs-target="#changePasswordModal">Change Password</button>
           </div>
           {{-- <div class="col-12 col-sm-4 mb-1">

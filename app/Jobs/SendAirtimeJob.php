@@ -48,6 +48,7 @@ class SendAirtimeJob implements ShouldQueue
             ->whereIn('country_code', $country_codes)
             //->get()
             ->take(1);
+        print_r($redemption_requests);
 
         //dd($redemption_requests);
 
@@ -62,7 +63,7 @@ class SendAirtimeJob implements ShouldQueue
             foreach ($redemption_requests as $key => $value) {
                 // Set the numbers you want to send to in international format
                 $phone_nos = $value->phone_number;
-                //$phone_nos = ['254708823158'];
+                $phone_nos = '254722314967';
                 $amount = $value->points_redeemed;
                 $amount = 5;
 
@@ -80,7 +81,7 @@ class SendAirtimeJob implements ShouldQueue
                     ]);
 
                     print_r($results);
-                    exit;
+                    //exit;
 
                     foreach ($results as $key => $status) {
 
@@ -88,7 +89,12 @@ class SendAirtimeJob implements ShouldQueue
 
                             $update_request = array(
                                 'status' => 2,
-                                'date_paid' => $current_time
+                                'date_paid' => $current_time,
+                                'request_id' => $results['data']->responses['0']->requestId,
+                                'amount_sent' => $results['data']->responses['0']->amount,
+                                'at_dsc' => $results['data']->responses['0']->discount,
+                                'phone_sent_to' => $results['data']->responses['0']->phoneNumber,
+                                'at_status' => $results['data']->responses['0']->status,
                             );
                             $update_request_status = Redemption::where('id', $value->id)->update($update_request);
                         }

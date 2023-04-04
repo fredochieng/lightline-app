@@ -21,4 +21,6 @@ Route::middleware(['auth', 'account.verified', 'role:Panel'])->group(function ()
 
     Route::get('/user/transactions', [RedemptionsController::class, 'transactionsList'])->name('user.transactionList');
     Route::get('/user/get-transactions', [RedemptionsController::class, 'getPanelPointTransactions'])->name('user.get-transactions');
+    
 });
+

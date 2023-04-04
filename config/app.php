@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -194,7 +195,13 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // custom theme helper
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Helper' => App\Helpers\Helpers::class,
     ])->toArray(),
+
+    'points_bulk_upload_fields' => [
+        'panel',
+        'points'
+    ],
 
 ];

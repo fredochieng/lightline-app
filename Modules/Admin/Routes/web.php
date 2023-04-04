@@ -22,8 +22,8 @@ Route::middleware(['auth', 'account.verified', 'role:Admin'])->group(
 
             /** Panel Management Module */
             Route::namespace('\Modules\Panel\Http\Controllers')->group(function () {
-                Route::get('/panel/active', 'PanelController@panelActiveBlade')->name('admin.panel.active');
-                Route::get('/panel/active/fetch', 'PanelController@panelActiveFetch')->name('admin.panel.active.fetch');
+                Route::get('/panel', 'PanelController@panelActiveBlade')->name('admin.panel.active');
+                Route::get('/panel/fetch', 'PanelController@panelActiveFetch')->name('admin.panel.active.fetch');
                 Route::get('/panel/&id={id}', 'PanelController@getPanelDetails')->name('admin.get.panel.details');
             });
 
@@ -37,6 +37,10 @@ Route::middleware(['auth', 'account.verified', 'role:Admin'])->group(
             Route::namespace('\Modules\Redemptions\Http\Controllers')->group(function () {
                 Route::get('/panel/redemptions', 'RedemptionsController@showRedemptionsView')->name('admin.show.red.view');
                 Route::get('/panel/redemptions/fetch', 'RedemptionsController@panelRedemptionsFetch')->name('admin.points.trans.fetch');
+                Route::get('/panel/award-points', 'RedemptionsController@uploadPointsFile')->name('admin.show.award.points');
+                Route::post('/panel/award-points/upload', 'RedemptionsController@saveUploadPointsFile')->name('points.upload.file');
+                Route::get('/bulk/upload/preview/{id}', 'RedemptionsController@uploadFilePreview')->name('admin.points.bulk.preview');
+                Route::post('/bulk/upload/process', 'RedemptionsController@processUploadPointsFile')->name('admin.process.bulk.upload');
             });
 
             Route::namespace('\Modules\Admin\Http\Controllers')->group(function () {

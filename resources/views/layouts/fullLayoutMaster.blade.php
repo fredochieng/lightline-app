@@ -1,13 +1,14 @@
 @isset($pageConfigs)
-  {!! Helper::updatePageConfig($pageConfigs) !!}
+{!! Helper::updatePageConfig($pageConfigs) !!}
 @endisset
 
 <!DOCTYPE html>
 @php $configData = Helper::applClasses(); @endphp
 
 <html class="loading {{ $configData['theme'] === 'light' ? '' : $configData['layoutTheme'] }}"
-  lang="@if (session()->has('locale')){{ session()->get('locale') }}@else{{ $configData['defaultLanguage'] }}@endif" data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}"
-  @if ($configData['theme'] === 'dark') data-layout="dark-layout"@endif>
+  lang="@if (session()->has('locale')){{ session()->get('locale') }}@else{{ $configData['defaultLanguage'] }}@endif"
+  data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}" @if ($configData['theme']==='dark' )
+  data-layout="dark-layout" @endif>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,17 +28,16 @@
 
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
-
+  <link href="{{ asset('node_modules/toastr/toastr.min.css') }}" rel="stylesheet">
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
 </head>
-
+{{-- @include('sweetalert::alert') --}}
 
 
 <body
   class="vertical-layout vertical-menu-modern {{ $configData['bodyClass'] }} {{ $configData['theme'] === 'dark' ? 'dark-layout' : '' }} {{ $configData['blankPageClass'] }} blank-page"
-  data-menu="vertical-menu-modern" data-col="blank-page" data-framework="laravel"
-  data-asset-path="{{ asset('/') }}">
+  data-menu="vertical-menu-modern" data-col="blank-page" data-framework="laravel" data-asset-path="{{ asset('/') }}">
 
   <!-- BEGIN: Content-->
   <div class="app-content content {{ $configData['pageClass'] }}">
@@ -57,7 +57,7 @@
 
   {{-- include default scripts --}}
   @include('panels/scripts')
-
+  <script src="{{ asset('node_modules/toastr/toastr.min.js') }}"></script>
   <script type="text/javascript">
     $(window).on('load', function() {
       if (feather) {
@@ -68,7 +68,7 @@
       }
     })
   </script>
-
+  @include('sweetalert::alert')
 </body>
 
 </html>
