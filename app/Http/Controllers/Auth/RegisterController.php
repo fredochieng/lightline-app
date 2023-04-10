@@ -133,7 +133,7 @@ class RegisterController extends Controller
                 'verirication_code' => $user->verification_code
             ];
 
-            $email = EmailService::sendEmail($user->email,  'Verify Email', 'emails.reset-password', $data);
+            //$email = EmailService::sendEmail($user->email,  'Verify Email', 'emails.reset-password', $data);
 
             DB::commit();
 
