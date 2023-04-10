@@ -224,6 +224,7 @@ class RegisterController extends Controller
                         "message" => 'Account activated successfully'
                     ));
                 } catch (\Exception $e) {
+                    print_r('ffffff');
                     dd($e);
                     DB::rollBack();
                     /** Return response with status code */
