@@ -52,8 +52,8 @@
                     Account</button>
 
                 <p class="text-center mt-2">
-                    <span>Didn’t get the code?</span><a href="Javascript:void(0)"><span>&nbsp;Resend verification
-                            code</span></a>
+                    {{-- <span>Didn’t get the code?</span><a href="Javascript:void(0)"><span>&nbsp;Resend verification
+                            code</span></a> --}}
                 </p>
             </div>
         </div>
