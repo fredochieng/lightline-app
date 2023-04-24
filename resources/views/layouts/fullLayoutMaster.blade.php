@@ -28,7 +28,8 @@
 
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
-  <link href="{{ asset('node_modules/toastr/toastr.min.css') }}" rel="stylesheet">
+  {{--
+  <link href="{{ asset('node_modules/toastr/toastr.min.css') }}" rel="stylesheet"> --}}
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
 </head>
@@ -57,7 +58,7 @@
 
   {{-- include default scripts --}}
   @include('panels/scripts')
-  <script src="{{ asset('node_modules/toastr/toastr.min.js') }}"></script>
+  {{-- <script src="{{ asset('node_modules/toastr/toastr.min.js') }}"></script> --}}
   <script type="text/javascript">
     $(window).on('load', function() {
       if (feather) {

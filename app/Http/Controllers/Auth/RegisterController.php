@@ -133,7 +133,7 @@ class RegisterController extends Controller
                 'verirication_code' => $user->verification_code
             ];
 
-            $email = EmailService::sendEmail($user->email,  'Verify Email', 'emails.reset-password', $data);
+            $email = EmailService::sendEmail($user->email,  'Verify Email', 'emails.verify-account', $data);
 
             DB::commit();
 
@@ -224,7 +224,7 @@ class RegisterController extends Controller
                         "message" => 'Account activated successfully'
                     ));
                 } catch (\Exception $e) {
-                    dd($e);
+                    
                     DB::rollBack();
                     /** Return response with status code */
                     return json_encode(array(
