@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/messagecenter', function (Request $request)
 });
 
 Route::post('/client/send/message', 'MessageCenterController@send_message');
+Route::post('/client/send/message_client', 'MessageCenterController@send_message_client');
